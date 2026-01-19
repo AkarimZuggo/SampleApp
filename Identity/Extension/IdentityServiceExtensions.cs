@@ -10,7 +10,7 @@ namespace Identity.Extension
     {
         public static void AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppIdentityContext>(options =>options.UseNpgsql(configuration.GetConnectionString("ApplicationConnectionString")));
+            services.AddDbContext<AppIdentityContext>(options =>options.UseSqlServer(configuration.GetConnectionString("ApplicationConnectionString")));
             services.AddDefaultIdentity<AppUser>()
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<AppIdentityContext>()

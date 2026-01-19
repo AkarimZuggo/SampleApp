@@ -14,7 +14,7 @@ namespace DataAccess
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("ApplicationConnectionString")));
+                options.UseSqlServer(configuration.GetConnectionString("ApplicationConnectionString")));
             //Register Persistence Services
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ICompanyRepository, CompanyRepository>();

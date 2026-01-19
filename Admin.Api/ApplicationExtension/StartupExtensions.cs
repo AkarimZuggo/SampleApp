@@ -1,10 +1,8 @@
 ﻿using Common.Logging;
 using DataAccess;
 using DataAccess.Context;
-using Entities.DBEntities;
 using Identity;
 using Identity.Extension;
-using Infrastructure.ResponseHandler.Handlers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Services;
@@ -20,7 +18,7 @@ namespace Admin.Api.ApplicationExtension
             builder.Services.AddControllers().AddJsonOptions(x =>{x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());});
             builder.Services.AddCors(options => {options.AddDefaultPolicy( builder =>{builder.AllowAnyOrigin().AllowAnyHeader() .AllowAnyMethod();});});
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddDbContext<AppDbContext>(otp => otp.UseNpgsql(builder.Configuration.GetConnectionString("ApplicationConnectionString")));
+            builder.Services.AddDbContext<AppDbContext>(otp => otp.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationConnectionString")));
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddAuthentication();
             builder.Services.AddPersistenceServices(builder.Configuration);
