@@ -1,0 +1,20 @@
+﻿namespace Infrastructure.ResponseHandler.Commons
+{
+    public class ApiResponse<T>
+    {
+        public int StatusCode { get; set; }
+        public T Data { get; set; }
+        public bool Succeeded { get; set; }
+        public string Message { get; set; }
+
+        public static ApiResponse<T> Fail(string errorMessage)
+        {
+            return new ApiResponse<T> { Succeeded = false, Message = errorMessage };
+        }
+
+        public static ApiResponse<T> Success(T data)
+        {
+            return new ApiResponse<T> { Succeeded = true, Data = data };
+        }
+    }
+}
